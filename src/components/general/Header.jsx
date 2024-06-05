@@ -26,7 +26,7 @@ export default function Header() {
     }, []);
 
 
-    const hideNav = windowWidth >= 640;
+    const hideNav = windowWidth >= 820;
 
     const handleMouseEnter = (e) => {
         const parentOffset = e.target.getBoundingClientRect();
@@ -130,7 +130,15 @@ export default function Header() {
 
     return (
         <>
-            <header className={`${isScrolled ? "bg-midnight border-b-[1px]" : "bg-transparent"} w-full border-0 border-[#424242] fixed top-0 transition duration-150`}>
+            <span className={
+                `${styles.transition_nomral} 
+                ${isOpen ? "opacity-100 visible" : "opacity-0 invisible"} 
+                w-full h-full fixed top-0 left-0 bg-black/45 backdrop-blur-sm`}
+                onClick={toggleMenu}
+            >
+
+            </span>
+            <header className={`${isScrolled ? "bg-midnight border-b-[1px]" : "bg-transparent"} w-full border-0 border-[#424242] fixed top-0 transition duration-150 z-[20]`}>
                 <div className={`${styles.sectionWidth} py-6 w-full max-w-7xl mx-auto`}>
                     <div className='flex justify-between items-center'>
                         <div>
@@ -150,7 +158,7 @@ export default function Header() {
                                                 to={list.id}
                                                 spy={true}
                                                 smooth={true}
-                                                offset={-150}
+                                                offset={-120}
                                                 duration={450}
                                                 onClick={(e) => {
                                                     // handleNavLinkClick(index, e);
@@ -190,7 +198,7 @@ export default function Header() {
                             </nav>
                         </div>
                         <div className='flex justify-between items-center gap-x-8'>
-                            <div className='hidden sm:block relative overflow-hidden w-36 h-12 bg-transparent rounded-md border border-yolk text-yolk verdana text-base'>
+                            <div className='hidden md:block relative overflow-hidden w-36 h-12 bg-transparent rounded-md border border-yolk text-yolk verdana text-base'>
                                 <a href="#" className='button_su_inner flex items-center hover:text-white transition-all duration-500 justify-center w-full h-full relative'
                                     onMouseEnter={handleMouseEnter}
                                     onMouseLeave={handleMouseLeave}
@@ -206,7 +214,7 @@ export default function Header() {
                             {hideNav ? (
                                 null
                             ) : (
-                                <div className='md:hidden flex flex-col gap-y-3 cursor-pointer z-[3]' onClick={toggleMenu}>
+                                <div className='flex flex-col gap-y-3 cursor-pointer z-[3]' onClick={toggleMenu}>
                                     <span className={`w-8 h-[3px] ${isOpen ? "rotate-45 translate-y-2" : ""} block bg-white transition-all duration-150 ease-in-out`}></span>
                                     <span className={`w-8 h-[3px] ${isOpen ? "-rotate-45 -translate-y-2" : ""} block bg-white transition-all duration-150 ease-in-out`}></span>
                                 </div>

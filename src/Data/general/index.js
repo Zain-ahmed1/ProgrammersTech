@@ -16,8 +16,8 @@ const NavLinks = [
         title: "Projects",
     },
     {
-        id: "reviews",
-        title: "Reviews",
+        id: "contact",
+        title: "Contact",
     }
 ]
 

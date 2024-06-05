@@ -67,6 +67,10 @@ body {
   /*animation-timing-function: ease-in-out; */
 }
 
+.Journey:nth-child(3)::after {
+  height: 0;
+}
+
 .explode-circle {
   animation: explode 0.5s forwards;
 
@@ -78,8 +82,8 @@ body {
 
 .blob {
   background-image:
-  linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-  url('./assets/heroImage.png');
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url('./assets/heroImage.png');
   width: 380px;
   height: 380px;
   background-size: cover;
