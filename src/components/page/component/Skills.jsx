@@ -32,18 +32,23 @@ function Skills() {
         };
     }, []);
 
+
     function handleModal(data) {
         setModalData(data);
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
     }
 
     function closeModal() {
         setModalData(null);
+        document.body.style.overflow = 'auto';
+        document.documentElement.style.overflow = 'auto';
     }
 
     return (
         <>
             <section id='skills'>
-                <div className={`${styles.sectionWidth} flex text-white flex-col justify-center items-start md:pt-4 pb-14 gap-y-6`}>
+                <div className={`${styles.sectionWidth} flex text-white flex-col justify-center items-start md:pt-4 pb-10 gap-y-6`}>
                     <div className='w-full text-center'>
                         <h1 className='text-center text-3xl md:text-4xl w-full pb-3 font-bold text-white mx-auto'>Skills <span className='text-yolk'>&</span> Qualifications</h1>
                         <p className='text-white text-base w-full max-w-[400px] mx-auto'>
@@ -61,7 +66,9 @@ function Skills() {
                                         {(skillSet.FrontSkills || skillSet.BackSkills).map((skill, skillIndex) => (
                                             <div key={skill.name} className='w-full md:w-[44%] 2xl:w-[46%]'>
                                                 <div className='flex justify-between items-start'>
-                                                    <span className='text-sm sm:text-base text-white/70 font-medium block pb-3'>{skill.name}</span>
+                                                    <span className='text-sm sm:text-base text-white/70 font-medium block pb-3'>
+                                                        {skill.name}
+                                                    </span>
                                                     <span className='text-white/60 text-sm sm:text-base'>{skill.skillNum}%</span>
                                                 </div>
                                                 <div className='w-full bg-black/50 rounded-full h-2 relative -z-[1]'>
@@ -80,7 +87,7 @@ function Skills() {
                     </div>
                     <div className='w-full'>
                         <div className='w-full'>
-                            <h1 className='w-full text-2xl font-bold pt-10'>
+                            <h1 className='w-full max-w-[280px] sm:max-w-full text-2xl font-bold pt-10'>
                                 Transforming <span className='text-yolk'>Concepts </span>
                                 with Knowledge
                             </h1>
@@ -90,14 +97,14 @@ function Skills() {
                             {qualification.map((e, index) => (
                                 <div key={index} className='Journey relative pb-8 w-full after:content-[""] after:absolute after:w-[2px] after:rounded-full after:top-0 after:left-4 after:h-full after:bg-yolk'>
                                     <span className='w-9 h-9 flex justify-center items-center bg-midnight z-[1] border border-yolk text-yolk rounded-full absolute left-0 top-0'>{e.id}</span>
-                                    <div className='ml-14 flex justify-between items-start'>
+                                    <div className='ml-14 flex sm:flex-row flex-col gap-y-6 justify-between items-start gap-x-10'>
                                         <div>
                                             <h2 className='font-semibold text-lg pb-2'>{e.title}</h2>
                                             <p className='w-full max-w-[720px]'>
                                                 {e.description}
                                             </p>
                                         </div>
-                                        <div className='w-96 h-52 relative proof after:content-[""] after:bg-black/20 after:backdrop-blur-sm after:absolute after:w-full after:h-full after:left-0 after:top-0 after:rounded-2xl'
+                                        <div className=' w-full sm:w-96 h-52 relative proof after:content-[""] after:bg-black/20 after:backdrop-blur-sm after:absolute after:w-full after:h-full after:left-0 after:top-0 after:rounded-2xl'
 
                                             onClick={() => handleModal(e.modalData)}
                                         >
@@ -124,9 +131,9 @@ function Skills() {
                     onClick={closeModal}
                 >
                     {modalData && (
-                        <div className='bg-white rounded-lg overflow-auto max-w-lg mt-24 w-full h-[580px]' onClick={e => e.stopPropagation()}>
+                        <div className='bg-white rounded-lg overflow-auto max-w-lg w-full h-[620px] py-6' onClick={e => e.stopPropagation()}>
                             {modalData.map((item, index) => (
-                                <div key={index} className="py-6 pb-0 px-4">
+                                <div key={index} className="pb-0 px-4">
                                     <div className="modal-head">
                                         <h1 className='text-center text-xl font-semibold mb-3'>{item.head}</h1>
                                     </div>

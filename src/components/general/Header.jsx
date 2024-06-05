@@ -181,14 +181,19 @@ export default function Header() {
                                         null
                                     ) : (
                                         <div className='relative overflow-hidden w-[95%] mx-4 px-4 sm:w-40 h-14 bg-transparent rounded-md border border-yolk text-yolk verdana text-base'>
-                                            <a href="#" className='button_su_inner flex items-center hover:text-white transition-all duration-500 justify-center w-full h-full relative'
+                                            <Link
+                                                to="contact"
+                                                spy={true}
+                                                smooth={true}
+                                                offset={-120}
+                                                duration={450} className='button_su_inner flex items-center hover:text-white transition-all duration-500 justify-center w-full h-full relative'
                                                 onMouseEnter={handleMouseEnter}
                                                 onMouseLeave={handleMouseLeave}
                                             >
                                                 <span className='relative z-[1]'>
                                                     Hire Me
                                                 </span>
-                                            </a>
+                                            </Link>
                                             <span className={`su_button_circle ${circleAnimation}`}
                                                 style={{ left: circlePosition.left, top: circlePosition.top }}
                                             ></span>
@@ -199,14 +204,19 @@ export default function Header() {
                         </div>
                         <div className='flex justify-between items-center gap-x-8'>
                             <div className='hidden md:block relative overflow-hidden w-36 h-12 bg-transparent rounded-md border border-yolk text-yolk verdana text-base'>
-                                <a href="#" className='button_su_inner flex items-center hover:text-white transition-all duration-500 justify-center w-full h-full relative'
+                                <Link
+                                    to="contact"
+                                    spy={true}
+                                    smooth={true}
+                                    offset={-120}
+                                    duration={450} className='button_su_inner flex items-center hover:text-white transition-all duration-500 justify-center w-full h-full relative'
                                     onMouseEnter={handleMouseEnter}
                                     onMouseLeave={handleMouseLeave}
                                 >
                                     <span className='relative z-[1]'>
                                         Hire Me
                                     </span>
-                                </a>
+                                </Link>
                                 <span className={`su_button_circle ${circleAnimation}`}
                                     style={{ left: circlePosition.left, top: circlePosition.top }}
                                 ></span>
