@@ -35,17 +35,24 @@ export default function TicTacToe() {
     const [gameState, setGameState] = useState(GameState.inProgress); //Checking GameState
     const [difficulty, setDifficulty] = useState("Medium"); // Bot Difficulty
     const [gameMode, setGameMode] = useState("PvP");
+    const [isProcessing, setIsProcessing] = useState(false);
 
     useEffect(() => {
-        if (gameState === GameState.inProgress && gameMode === "PvBot" && playerTurn === "O") {
-            botMove();
+        if (gameState === GameState.inProgress && gameMode === "PvBot" && playerTurn === "O" && !isProcessing) {
+            setIsProcessing(true); // Disable during bot's calculation
+            setTimeout(() => { // Simulate bot's "thinking" delay
+                botMove();
+                setIsProcessing(false);
+            }, 500);
         }
-    }, [playerTurn, gameState, gameMode]);
+    }, [playerTurn, gameState, gameMode, tiles]);
 
     const handleTileClick = (index) => {
 
-        if (gameState !== GameState.inProgress || tiles[index] !== null) return;
+        if (gameState !== GameState.inProgress || tiles[index] !== null || isProcessing) return;
+        setIsProcessing(true); // Disable further clicks
         makeMove(index, playerTurn);
+        setIsProcessing(false); // Re-enable after move is set
 
         if (gameState !== GameState.inProgress) {
             return;
@@ -67,27 +74,14 @@ export default function TicTacToe() {
     }
 
     const makeMove = (index, player) => {
+        if (tiles[index] !== null) return; // Additional safeguard
+
         const newTiles = [...tiles];
         newTiles[index] = player;
         setTiles(newTiles);
-        setPlayerTurn(player === "X" ? "O" : "X");
-    };
 
-    const botMove = () => {
-        const move = findBestMove(tiles);
-        if (move !== -1) {
-            setTimeout(() => makeMove(move, "O"), 500);
-        }
-    };
-
-    const findBestMove = (tiles) => {
-        let move = findCriticalMove(tiles, "O");
-        if (move !== -1) return move;
-
-        move = findCriticalMove(tiles, "X");
-        if (move !== -1) return move;
-
-        return findRandomMove(tiles);
+        // Prevent further moves until this one is processed
+        setPlayerTurn(prev => (prev === "X" ? "O" : "X"));
     };
 
     const findRandomMove = (tiles) => {
@@ -103,6 +97,57 @@ export default function TicTacToe() {
             }
         }
         return -1;
+    };
+
+    const findMediumMove = (tiles) => {
+        let move = findCriticalMove(tiles, "O"); // Check if bot can win
+        if (move !== -1) return move;
+        move = findCriticalMove(tiles, "X"); // Check if bot needs to block the player
+        if (move !== -1) return move;
+        return findRandomMove(tiles);
+    };
+
+    const findExpertMove = (tiles) => {
+        // First, check for a winning move
+        let move = findCriticalMove(tiles, "O");
+        if (move !== -1) return move;
+
+        // Next, check for a blocking move
+        move = findCriticalMove(tiles, "X");
+        if (move !== -1) return move;
+
+        // Then try to take the center if it's available
+        if (tiles[4] === null) return 4;
+
+        // Prioritize corners over sides because they offer more winning opportunities
+        const corners = [0, 2, 6, 8];
+        const availableCorners = corners.filter(index => tiles[index] === null);
+        if (availableCorners.length > 0) {
+            return availableCorners[Math.floor(Math.random() * availableCorners.length)];
+        }
+
+        // Lastly, take any remaining available move
+        return findRandomMove(tiles);
+    };
+
+    const decideMove = (tiles, difficulty) => {
+        switch (difficulty) {
+            case "Easy":
+                return findRandomMove(tiles);
+            case "Medium":
+                return findMediumMove(tiles);
+            case "Expert":
+                return findExpertMove(tiles);
+            default:
+                return findRandomMove(tiles);
+        }
+    };
+
+    const botMove = () => {
+        const move = decideMove(tiles, difficulty);
+        if (move !== -1) {
+            setTimeout(() => makeMove(move, "O"), 500);
+        }
     };
 
     useEffect(() => {
@@ -143,16 +188,21 @@ export default function TicTacToe() {
         setTiles(Array(9).fill(null));
         setGameState(GameState.inProgress);
         setStrikeClass("");
+        setPlayerTurn(Player_X);
     }
 
     function resetGame() {
         setTiles(Array(9).fill(null));
-        setPlayerTurn("X");
         setGameState(GameState.inProgress);
+        setPlayerTurn(Player_X);
         setScoreX(0);
         setScoreO(0);
         setStrikeClass("");
     }
+
+    useEffect(() => {
+        endGame();
+    }, [gameMode, difficulty]);
 
     return (
         <>
@@ -162,7 +212,7 @@ export default function TicTacToe() {
                     <p className='text-lg text-center'>Are you smarter than Bot?</p>
                 </div>
                 <div className='mb-4 w-full flex justify-start'>
-                    <label htmlFor="gameMode" className='text-lg text-white/60'>Game Mode: &nbsp;</label>
+                    <label htmlFor="gameMode" className='text-lg text-white/60 self-center'>Game Mode: &nbsp;</label>
                     <select className='text-white/80 bg-gray-800 border border-gray-500 px-2 w-1/2 py-2'
                         value={gameMode} onChange={(e) => setGameMode(e.target.value)}>
                         <option value="PvP">Player vs Player</option>
@@ -171,7 +221,7 @@ export default function TicTacToe() {
                 </div>
                 {gameMode === "PvBot" && (
                     <div className='w-full flex justify-start'>
-                        <label htmlFor="difficulty" className='text-lg text-white/60 pr-5'>Difficulty: &nbsp;</label>
+                        <label htmlFor="difficulty" className='text-lg text-white/60 pr-5 self-center'>Difficulty: &nbsp;</label>
                         <select className='text-white/80 bg-gray-800 border border-gray-500 px-2 w-1/2 py-2'
                             id="difficulty" value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
                             <option value="Easy">Easy</option>
@@ -182,7 +232,7 @@ export default function TicTacToe() {
                 )}
             </div>
             <ScoreBoard scoreX={scoreX} scoreO={scoreO} />
-            <Board playerTurn={playerTurn} tiles={tiles} onTileClick={handleTileClick} strikeClass={strikeClass} />
+            <Board playerTurn={playerTurn} tiles={tiles} onTileClick={handleTileClick} strikeClass={strikeClass} disabled={isProcessing} />
             <GameOver gameState={gameState} />
             <div className="flex justify-center space-x-4 mt-12 pb-12">
                 <button onClick={endGame} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Game</button>
