@@ -63,7 +63,7 @@ export default function Contact() {
     return (
         <>
             <section id="contact">
-                <div className={`w-full px-4 mx-auto max-w-2xl py-12`}>
+                <div className={`w-full px-4 mx-auto max-w-2xl pt-6 pb-8 md:py-12`}>
                     <div className='pb-4 text-center'>
                         <h1 className='text-3xl md:text-4xl text-white font-bold'>
                             Love My&nbsp;
@@ -73,7 +73,7 @@ export default function Contact() {
                         </h1>
                     </div>
                     <form ref={form} onSubmit={sendEmail} className="my-5 flex justify-center flex-col">
-                        <div className='mb-4 flex items-center justify-between gap-x-5'>
+                        <div className='mb-4 flex md:flex-row flex-col gap-y-4 items-center justify-between gap-x-5'>
                             <input
                                 type="email"
                                 id="email"
@@ -100,7 +100,7 @@ export default function Contact() {
                         </div>
                         {successmsg && (<p className='text-base text-green-500 font-medium text-center mt-3'>{successmsg}</p>)}
                         {msgerror && (<p className='text-base text-red-500 font-medium text-center mt-3'>{msgerror}</p>)}
-                        <button type="submit" className={`${styles.transition_nomral} btn-shadow hover:text-white text-white bg-yolk mt-4 rounded-md w-52 mx-auto h-14`}>
+                        <button type="submit" className={`${styles.transition_nomral} btn-shadow hover:text-white text-white bg-yolk mt-4 rounded-md w-full sm:w-52 mx-auto h-14`}>
                             {isSending ? 'Sending...' : 'Send message'}
                         </button>
                     </form>
