@@ -41,6 +41,8 @@ function App() {
             "input",
             "textarea",
             "select",
+            "option",
+            ".css",
             "img",
             ".proof"
           ]}

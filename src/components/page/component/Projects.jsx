@@ -51,12 +51,12 @@ export default function Projects() {
                     </div>
                     <div className='w-full text-center mt-6 sm:mt-12'>
                         {visibleCount < MyWork.length && (
-                            <button onClick={handleShowMore} className={`${styles.transition_nomral} w-full sm:w-52 h-14 border hover:text-yolk bg-yolk hover:border-yolk border-transparent hover:bg-transparent text-black rounded-md text-base font-medium uppercase`}>
+                            <button onClick={handleShowMore} className={`${styles.transition_nomral} w-full sm:w-52 h-14 btn-shadow bg-yolk text-white rounded-md text-base font-medium uppercase`}>
                                 Show More
                             </button>
                         )}
                         {visibleCount >= MyWork.length && (
-                            <button onClick={handleShowLess} className={`${styles.transition_nomral} w-full sm:w-52 h-14 border hover:text-yolk bg-yolk hover:border-yolk border-transparent hover:bg-transparent text-black rounded-md text-base font-medium uppercase`}>
+                            <button onClick={handleShowLess} className={`${styles.transition_nomral} w-full sm:w-52 h-14 btn-shadow bg-yolk text-white rounded-md text-base font-medium uppercase`}>
                                 Show Less
                             </button>
                         )}
