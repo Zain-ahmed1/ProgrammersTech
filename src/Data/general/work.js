@@ -1,4 +1,4 @@
-import { Atagomi, BullRunBot, CCU, Kagan, Lfg, Route, Smoke, Uskpsp, meadowbrook, Dashboard } from "../../assets";
+import { Atagomi, BullRunBot, CCU, Kagan, Lfg, Route, Smoke, Uskpsp, meadowbrook, Dashboard, Aamha, Stellensuche } from "../../assets";
 
 const MyWork = [
     {
@@ -27,9 +27,9 @@ const MyWork = [
         url: "https://www.route60auto.com"
     },
     {
-        title: "Uskpsp",
-        img: Uskpsp,
-        url: "https://www.uskpsp.com"
+        title: "Armenian American Health Association",
+        img: Aamha,
+        url: "https://aamha.org/"
     },
     {
         title: "Smoke n Mirrors",
@@ -42,9 +42,9 @@ const MyWork = [
         url: "https://www.kaganinstitute.com"
     },
     {
-        title: "Bull Run Bot",
-        img: BullRunBot,
-        url: "https://bullrunbot.com",
+        title: "Stellensuche",
+        img: Stellensuche,
+        url: "https://stellensuche.paweco.ch/",
     },
     {
         title: "Atagomi Dashboard",

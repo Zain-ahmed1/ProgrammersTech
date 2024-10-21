@@ -10,7 +10,7 @@ export default function About() {
         <div className={`${styles.sectionWidth} bg-midnight rounded-2xl px-[0!important] mb-14 object-cover`}>
           <div className='flex lg:items-center lg:justify-start lg:flex-row flex-col-reverse gap-x-4'>
             <div className='object-cover w-full sm:w-[450px] h-[400px] sm:h-full'>
-              <img src={ProfileImg} alt="Profile Picture" className='lg:rounded-s-2xl lg:rounded-none rounded-b-2xl sm:rounded-2xl w-full lg:-ml-5 h-full object-cover' />
+              <img src={ProfileImg} datasrcset={ProfileImg} alt="Profile Picture" className='lg:rounded-s-2xl lg:rounded-none rounded-b-2xl sm:rounded-2xl w-full lg:-ml-5 h-full object-cover' loading='lazy'/>
             </div>
             <div className=' text-white 2xl:py-0 py-8 px-5'>
               <h1 className='pb-4 verdanaBold text-2xl md:text-3xl'>About <span className='text-yolk'>Me</span></h1>

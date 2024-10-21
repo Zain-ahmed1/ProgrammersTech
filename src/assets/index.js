@@ -22,6 +22,8 @@ import Smoke from "./projects/smoke.png"
 import Kagan from "./projects/kagan.png"
 import BullRunBot from "./projects/bullrunbot.png"
 import Dashboard from "./projects/atagomi-dashboard.png"
+import Aamha from "./projects/aamha.png"
+import Stellensuche from "./projects/stellensuche.png"
 
 export {
     Logo,
@@ -42,4 +44,6 @@ export {
     Kagan,
     BullRunBot,
     Dashboard,
+    Aamha,
+    Stellensuche
 }

@@ -34,9 +34,9 @@ export default function Projects() {
                     <div className='w-full flex flex-wrap justify-between items-start gap-y-6 md:gap-y-10 gap-x-0 pt-4 sm:pt-8'>
                         {MyWork.slice(0, visibleCount).map((prod, index) => (
                             <a key={index} href={prod.url} target='_blank' className='relative w-full md:w-[48%] overflow-hidden group'>
-                                <div className='w-full border border-[#4d5763] overflow-hidden rounded-2xl p-6 pb-0'>
-                                    <img src={prod.img} className={`${styles.transition_slow} group-hover:-translate-y-5 w-full h-full`} />
-                                    <div className='absolute left-0 rounded-b-2xl py-4 text-center backdrop-blur-lg text-white bottom-0 z-[1] bg-[#4d5763] bg-opacity-80 w-full flex justify-center items-center gap-x-2'>
+                                <div className='w-full border border-[#4d5763] overflow-hidden rounded-2xl p-4 sm:p-6 pb-0'>
+                                    <img src={prod.img} alt='Project Image' className={`${styles.transition_slow} sm:group-hover:-translate-y-5 w-full h-full md:h-[200px] lg:h-[300px]`} />
+                                    <div className='absolute left-0 rounded-b-2xl py-3 sm:py-4 text-center backdrop-blur-lg text-white bottom-0 z-[1] bg-[#4d5763] bg-opacity-80 w-full flex justify-center items-center gap-x-2'>
                                         <p className='font-bold text-base md:text-xl '>{prod.title}</p>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="1.5em" className={`${styles.transition_nomral} rotate-45 group-hover:rotate-90`} height="1.5em" viewBox="0 0 24 24">
                                             <g fill="none">
